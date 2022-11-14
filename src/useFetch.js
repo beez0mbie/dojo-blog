@@ -7,19 +7,23 @@ const useFecth = (url) => {
 
     useEffect(() => {
         setTimeout(async() => {
-            try {
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw Error('could not fetch data')
-                }
-                const resData = await response.json();
-                setData(resData)
-                setIsPending(false)
-                setError(false)
-            } catch (e) {
-                setError(e.message)
-                setIsPending(false)
-            }}, 1000);
+            fetch(url)
+                .then(res => {
+                    if (!res.ok) {
+                        throw Error('Could not fetch data from that resource!*')
+                    }
+                    return res.json()
+                })
+                .then( data => {
+                    setData(data);
+                    setIsPending(false);
+                    setError(null);
+                })
+                .catch(err => {
+                    setIsPending(false);
+                    setError(err.message);
+                })
+        }, 1000);
     },[url]);
 
     return {data, isPending, error}
