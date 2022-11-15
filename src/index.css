@@ -7,6 +7,10 @@
   color: #333;
 }
 
+a:not([class]) {
+  text-decoration: none;
+}
+
 .navbar {
   padding: 20px;
   display: flex;
