@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const Create = () => {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [author, setAuthor] = useState('yoshi');
     const [isPending, setIsPending] = useState(false)
+    const history = useHistory()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,6 +23,8 @@ const Create = () => {
 
         console.log(res.ok);
         setIsPending(false);
+        // history.go(-1)
+        history.push('/')
     }
 
     return ( 
